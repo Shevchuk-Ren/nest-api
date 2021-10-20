@@ -17,8 +17,16 @@ export class FeedbackService {
   findOne(id: string): Promise<Feedback> {
     return this.feedbackRepository.findOne(id);
   }
+  create(feedback: Feedback): Promise<Feedback> {
+    delete feedback.id
+    return this.feedbackRepository.save(feedback);
+  }
+  async update(feedback: Feedback): Promise<Feedback> {
+   
+    return this.feedbackRepository.save(feedback);
+  }
 
-  async remove(id: string): Promise<void> {
+   async remove(id: number): Promise<void> {
     await this.feedbackRepository.delete(id);
   }
 }
