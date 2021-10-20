@@ -25,7 +25,7 @@ export class FeedbackService {
     return this.feedbackRepository.save(feedback);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.feedbackRepository.delete(id);
   }
 }

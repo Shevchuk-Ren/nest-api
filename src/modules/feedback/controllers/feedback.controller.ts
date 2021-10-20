@@ -62,7 +62,11 @@ export class FeedbackController {
   }
 
   @Delete(':id')
-  deleteAction(@Param('id') id: number): Promise<void> {
+  async deleteAction(@Param('id') id: string): Promise<void> {
+    const newFeedback = await this.feedbackService.findOne(id);
+    if (newFeedback === undefined) {
+      throw new BadRequestException(`Not found id = ${id}`);
+    }
     return this.feedbackService.remove(id);
   }
 }
