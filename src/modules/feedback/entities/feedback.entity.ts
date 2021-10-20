@@ -1,7 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'form' })
-  
 export class Feedback {
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,7 +11,7 @@ export class Feedback {
   @Column()
   mail: string;
 
-   @Column("text")
+  @Column('text')
   message: string;
 
   @Column({ default: false })
