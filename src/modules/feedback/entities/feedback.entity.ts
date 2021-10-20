@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'form' })
 export class Feedback {
+
   @PrimaryGeneratedColumn()
   id: number;
 

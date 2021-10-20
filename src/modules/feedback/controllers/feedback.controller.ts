@@ -10,19 +10,26 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Feedback } from '../entities/feedback.entity';
 import { FeedbackService } from '../services/feedback.service';
 import { CreateDto, UpdateDto } from './dto';
+import { NotFoundResponse } from './type';
 
+@ApiTags('Users Feedback')
 @Controller('rest')
 export class FeedbackController {
   constructor(private readonly feedbackService: FeedbackService) {}
 
   @Get()
+   @ApiResponse({ status: 200, description: 'OK' })
+   @ApiResponse({ status: 404, description: 'Not found', type: NotFoundResponse })
   getAction(): Promise<Feedback[]> {
     return this.feedbackService.findAll();
   }
   @Get(':id')
+   @ApiResponse({ status: 200, description: 'OK' })
+   @ApiResponse({ status: 404, description: 'Not found', type: NotFoundResponse })
   async getOneAction(@Param('id') id: string): Promise<Feedback> {
     const feedback = await this.feedbackService.findOne(id);
 
@@ -33,6 +40,9 @@ export class FeedbackController {
   }
 
   @Post()
+  @ApiResponse({ status: 200, description: 'OK' })
+  @ApiResponse({ status: 404, description: 'Not found', type: NotFoundResponse })
+  @ApiBody({ type: CreateDto })
   postOneAction(@Body() createDto: CreateDto): Promise<Feedback> {
     const feedback = new Feedback();
     console.log(Feedback, `create`);
@@ -45,6 +55,9 @@ export class FeedbackController {
   }
 
   @Put(':id')
+  @ApiResponse({ status: 200, description: 'OK' })
+  @ApiResponse({ status: 404, description: 'Not found', type: NotFoundResponse })
+  @ApiBody({ type: UpdateDto })
   async updateAction(
     @Param('id') id: string,
     @Body() { name, mail, message }: UpdateDto,
@@ -62,6 +75,8 @@ export class FeedbackController {
   }
 
   @Delete(':id')
+  @ApiResponse({ status: 200, description: 'OK' })
+  @ApiResponse({ status: 404, description: 'Not found', type: NotFoundResponse })
   async deleteAction(@Param('id') id: string): Promise<void> {
     const newFeedback = await this.feedbackService.findOne(id);
     if (newFeedback === undefined) {
