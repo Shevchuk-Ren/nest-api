@@ -1,8 +1,8 @@
 {
   "type": "mysql",
-  "host": "process.env.PORT || localhost",
+  "host": "localhost",
  
-"url": "process.env.DATABASE_URL",
+
 
 
    
