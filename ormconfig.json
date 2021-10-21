@@ -1,6 +1,9 @@
 {
   "type": "mysql",
-  "host": "localhost",
+  "host": "process.env.PORT || localhost",
+ 
+"url": "process.env.DATABASE_URL",
+
 
    
   "port": 3306,
